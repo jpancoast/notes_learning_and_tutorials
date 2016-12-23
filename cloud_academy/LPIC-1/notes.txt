@@ -67,3 +67,32 @@ LPIC-1 101 Linux Partitions and Filesystems (5 of 5):
 	Disk Quotas:
 		quotacheck -avmug
 		quotaon / repquota / edquota
+
+----------------------------------------------------------
+LPIC-1 102 Linux shells, scripting, and databases:
+	. .bashrc is equivalent to source .bashrc
+	/etc/skel, what it does, etc.
+
+	export passes a variable to all child shells within the current one.
+
+	set / unset
+	env
+	aliases / alias / unalias
+	function newfucntion....
+	lists (man bash): ls | grep stuff && cat stuff
+		|| in shell is treated as an OR
+
+	./numbers.sh
+	./addpath.sh
+
+	test:
+		-f: the thing testing is a file and it exists
+		-r: is a file and is readable
+		-d: target is a directory
+
+		== / != for strings
+		-eq / -gt / -lt for numbers
+
+	seq
+
+	
