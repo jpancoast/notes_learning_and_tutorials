@@ -1,0 +1,69 @@
+
+
+LPIC-1 101 Linux Partitions and Filesystems (5 of 5):
+	MBR partitions limited to 4 primary partitions and disks of less than 2 TB
+	GPT partitions not available on all bios
+	fdisk for MBR partitions
+	parted or gdisk for GPT partitions
+
+	mkfs -t ext4 /dev/sdc
+
+	mkswap/mkreiserfs
+
+	df -i lists inode usage
+	df -T lists partition type
+
+	dumpe2fs /dev/xvda1
+
+	tune2fs tunes the FS (checks, etc.)
+
+	fsck/e2fsck
+
+	debugfs
+
+	mount /dev/sdc1 /mnt/usb-drive (ex)
+	umount
+
+	fstab
+
+	Permissions:
+		r/w/x read/write/execute
+		u/g/o user/group/others
+		Octal: read: 4 
+			   write: 2
+			   executable: 1
+		The number between the perms and the owner is the number of hardlinks
+
+		sudo chmod o-w filename (remove write from others)
+
+		s (suid bit)
+			sudo chmod u+s 
+
+		directory prevent others from deleting:
+			"sticky bit" chmod +t /ourfiles
+
+		guid: chmod g+s
+
+		umask: affects default permissions on created files. (basically 777-umask)
+
+	"FHS" Filesystem Hierarchy Standard
+
+	'sbin': system binaries is what it means. I never knew that.
+
+	finding files:
+		sudo find /etc/ -name *.conf
+		locate / updatedb
+		whereis / which / type
+
+	ln -s <what you want to link too> <Where you want the link to be>
+
+	symlinks: different inode(s)
+		ln -s /bin/cp ~/
+		can be id'd throught he 'l'
+	hardlinks: share inode(s)
+		ln ~/stuff1 ~/files/
+		appears like any other file.
+
+	Disk Quotas:
+		quotacheck -avmug
+		quotaon / repquota / edquota
