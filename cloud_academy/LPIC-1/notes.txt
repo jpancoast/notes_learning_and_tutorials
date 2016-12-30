@@ -1,5 +1,18 @@
+----------------------------------------------------------
+LPIC-1 101 Introduction (1 of 5):
+
+----------------------------------------------------------
+LPIC-1 101 System Architecture (2 of 5):
+
+----------------------------------------------------------
+LPIC-1 101 Boot and Package Management (3 of 5):
+
+----------------------------------------------------------
+LPIC-1 101 Command Line Basics (4 of 5):
 
 
+
+----------------------------------------------------------
 LPIC-1 101 Linux Partitions and Filesystems (5 of 5):
 	MBR partitions limited to 4 primary partitions and disks of less than 2 TB
 	GPT partitions not available on all bios
@@ -69,7 +82,7 @@ LPIC-1 101 Linux Partitions and Filesystems (5 of 5):
 		quotaon / repquota / edquota
 
 ----------------------------------------------------------
-LPIC-1 102 Linux shells, scripting, and databases:
+LPIC-1 102 Linux shells, scripting, and databases (1/6):
 	. .bashrc is equivalent to source .bashrc
 	/etc/skel, what it does, etc.
 
@@ -95,4 +108,95 @@ LPIC-1 102 Linux shells, scripting, and databases:
 
 	seq
 
-	
+	SQL vs. NoSQL. exams focuses on MySQL (SQL)
+		show, create, use, insert into, select, etc.
+
+
+
+----------------------------------------------------------
+LPIC-1 102 Linux Desktops (2/6):
+	/etc/X11/xorg.conf or xf86.config
+	xwininfo
+	xdpyinfo
+	xhost + ipadddress, xhost - ipaddress
+	x font server (should be removed from exam, but might not be yet)
+	older display managers: xdm, gdm, kdm
+	Exam focues on lightdm
+		resource files: /usr/share/lightdm/lightdm.conf.d/
+		must edit config files here: 
+			/etc/lightdm/lightdm.conf
+			/etc/lightdm/lightdm.conf.d/
+		prevent anonymous guest logins:
+			allow-guest=false
+		hide user list:
+			greeter-hide-users=false
+		log specific user in automatically:
+			autologin-user=steve
+		allow only guest login:
+			autologin-guest=true
+		edit greeter using file from:
+			/usr/share/xgreeters/
+		Have script run at startup:
+			session-setup-script=command
+
+	Accessibility stuff
+		Screen reader
+		high contrast
+		screen magnifying tool
+		braille interface
+
+		visual alerts
+
+		sticky keys, slow keys, bounce keys, repeat keys
+
+		mouse keys, simulated secondary click, hover click, on screen keyboard
+
+
+	aws & xwindows:
+		ubuntu
+		allow 5901, tcp
+		sudo useradd -m jpancoast
+		sudo password jpancoast
+		sudo usermod -aG admin jpancoast
+		sudo su - jpancoast
+		sudo vi /etc/ssh/sshd_config:
+			PasswordAuthentication yes
+		sudo service ssh restart
+		sudo apt-get install ubuntu-desktop
+		sudo apt-get install vnc4server
+		vncserver
+		vncserver -kill :1
+		cd .vnc
+		vi xstartup
+			#!/bin/sh
+			def
+			export XKL_XMODMAP_DISABLE=1
+			unset SESSION_MANAGER
+			unset DBUS_SESSION_BUS_ADDRESS
+
+			gnome-panel &
+			gnome-settings-daemon &
+			metacity &
+			nautilus &
+			gnome-terminal &
+
+		vncserver
+
+		Connect to vnc...
+
+
+
+----------------------------------------------------------
+LPIC-1 102 Linux Administration (3/6):
+
+
+----------------------------------------------------------
+LPIC-1 102 Linux system services (4/6):
+
+
+----------------------------------------------------------
+LPIC-1 102 Linux Networking (5/6):
+
+
+----------------------------------------------------------
+LPIC-1 102 Linux Security (6/6):
