@@ -5,15 +5,6 @@ import os
 import pprint
 
 
-def str_to_bool(s):
-    if s.lower() == "true":
-        return True
-    elif s.lower() == "false":
-        return False
-    else:
-        raise ValueError
-
-
 def main(argv):
     pp = pprint.PrettyPrinter(indent=4)
 
@@ -27,6 +18,7 @@ def main(argv):
     thing_1.sort()
     thing_2.sort()
 
+    print(type(thing_1))
     pp.pprint(thing_1)
     print()
     pp.pprint(thing_2)
