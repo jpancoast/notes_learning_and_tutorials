@@ -19,6 +19,8 @@ module "us-west-2-vpc-1" {
 
   tags = {
     Terraform = "true"
+    Owner     = "jpancoast@petabloc.com"
+    Purpose   = "Transit Gateway Testing"
   }
 }
 
@@ -39,6 +41,8 @@ module "us-west-2-vpc-2" {
 
   tags = {
     Terraform = "true"
+    Owner     = "jpancoast@petabloc.com"
+    Purpose   = "Transit Gateway Testing"
   }
 }
 
@@ -63,6 +67,8 @@ module "us-east-2-vpc-1" {
 
   tags = {
     Terraform = "true"
+    Owner     = "jpancoast@petabloc.com"
+    Purpose   = "Transit Gateway Testing"
   }
 }
 
@@ -83,5 +89,7 @@ module "us-east-2-vpc-2" {
 
   tags = {
     Terraform = "true"
+    Owner     = "jpancoast@petabloc.com"
+    Purpose   = "Transit Gateway Testing"
   }
 }
