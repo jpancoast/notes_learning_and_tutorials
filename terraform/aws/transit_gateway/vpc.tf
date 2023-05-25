@@ -16,6 +16,7 @@ module "us-west-2-vpc-1" {
 
   azs             = ["us-west-2a"]
   private_subnets = ["10.0.1.0/24"]
+  public_subnets  = ["10.0.2.0/24"]
 
   tags = {
     Terraform = "true"
@@ -38,6 +39,7 @@ module "us-west-2-vpc-2" {
 
   azs             = ["us-west-2a"]
   private_subnets = ["10.1.1.0/24"]
+  public_subnets  = ["10.1.2.0/24"]
 
   tags = {
     Terraform = "true"
@@ -64,6 +66,7 @@ module "us-east-2-vpc-1" {
 
   azs             = ["us-east-2a"]
   private_subnets = ["10.3.1.0/24"]
+  public_subnets  = ["10.3.2.0/24"]
 
   tags = {
     Terraform = "true"
@@ -86,6 +89,7 @@ module "us-east-2-vpc-2" {
 
   azs             = ["us-east-2a"]
   private_subnets = ["10.4.1.0/24"]
+  public_subnets  = ["10.4.2.0/24"]
 
   tags = {
     Terraform = "true"

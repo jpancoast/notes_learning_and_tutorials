@@ -3,16 +3,24 @@ module "us-west-2-tgw" {
   source  = "terraform-aws-modules/transit-gateway/aws"
   version = "~> 2.0"
 
+  providers = {
+    aws = aws.us-west-2
+  }
+
   name        = "us-west-2-tgw"
   description = "us-west-2-tgw"
 
-  enable_auto_accept_shared_attachments = true
+  enable_dns_support = true
 
   tags = {
     Terraform = "true"
     Owner     = "jpancoast@petabloc.com"
     Purpose   = "Transit Gateway Testing"
   }
+
+
+  ram_allow_external_principals = true
+  ram_principals                = [577660233792]
 
   vpc_attachments = {
     vpc_1 = {
