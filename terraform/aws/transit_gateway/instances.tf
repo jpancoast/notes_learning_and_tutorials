@@ -67,6 +67,14 @@ resource "aws_security_group" "tgw-testing-us-west-2-vpc-1" {
     cidr_blocks = ["76.154.206.41/32", module.us-west-2-vpc-1.vpc_cidr_block, module.us-west-2-vpc-2.vpc_cidr_block, module.us-east-2-vpc-1.vpc_cidr_block, module.us-east-2-vpc-2.vpc_cidr_block]
   }
 
+  ingress {
+    description = "ping"
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
+    cidr_blocks = [module.us-west-2-vpc-1.vpc_cidr_block, module.us-west-2-vpc-2.vpc_cidr_block, module.us-east-2-vpc-1.vpc_cidr_block, module.us-east-2-vpc-2.vpc_cidr_block]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -88,6 +96,14 @@ resource "aws_security_group" "tgw-testing-us-west-2-vpc-2" {
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["76.154.206.41/32", module.us-west-2-vpc-1.vpc_cidr_block, module.us-west-2-vpc-2.vpc_cidr_block, module.us-east-2-vpc-1.vpc_cidr_block, module.us-east-2-vpc-2.vpc_cidr_block]
+  }
+
+  ingress {
+    description = "ping"
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
+    cidr_blocks = [module.us-west-2-vpc-1.vpc_cidr_block, module.us-west-2-vpc-2.vpc_cidr_block, module.us-east-2-vpc-1.vpc_cidr_block, module.us-east-2-vpc-2.vpc_cidr_block]
   }
 
   egress {
@@ -113,6 +129,14 @@ resource "aws_security_group" "tgw-testing-us-east-2-vpc-1" {
     cidr_blocks = ["76.154.206.41/32", module.us-west-2-vpc-1.vpc_cidr_block, module.us-west-2-vpc-2.vpc_cidr_block, module.us-east-2-vpc-1.vpc_cidr_block, module.us-east-2-vpc-2.vpc_cidr_block]
   }
 
+  ingress {
+    description = "ping"
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
+    cidr_blocks = [module.us-west-2-vpc-1.vpc_cidr_block, module.us-west-2-vpc-2.vpc_cidr_block, module.us-east-2-vpc-1.vpc_cidr_block, module.us-east-2-vpc-2.vpc_cidr_block]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -134,6 +158,14 @@ resource "aws_security_group" "tgw-testing-us-east-2-vpc-2" {
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["76.154.206.41/32", module.us-west-2-vpc-1.vpc_cidr_block, module.us-west-2-vpc-2.vpc_cidr_block, module.us-east-2-vpc-1.vpc_cidr_block, module.us-east-2-vpc-2.vpc_cidr_block]
+  }
+
+  ingress {
+    description = "ping"
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
+    cidr_blocks = [module.us-west-2-vpc-1.vpc_cidr_block, module.us-west-2-vpc-2.vpc_cidr_block, module.us-east-2-vpc-1.vpc_cidr_block, module.us-east-2-vpc-2.vpc_cidr_block]
   }
 
   egress {
@@ -173,6 +205,20 @@ resource "aws_instance" "test-tgw-us-west-2-vpc-1-private" {
   }
 }
 
+resource "aws_instance" "test-tgw-us-west-2-vpc-2-private" {
+  provider = aws.us-west-2
+
+  ami                    = data.aws_ami.us-west-2.id
+  instance_type          = "t3.micro"
+  key_name               = aws_key_pair.tgw_testing-us-west-2.key_name
+  subnet_id              = module.us-west-2-vpc-2.private_subnets[0]
+  vpc_security_group_ids = [aws_security_group.tgw-testing-us-west-2-vpc-2.id]
+
+  tags = {
+    Name = "test-tgw-us-west-2-private"
+  }
+}
+
 resource "aws_instance" "test-tgw-us-east-2-vpc-1-public" {
   provider = aws.us-east-2
 
@@ -202,10 +248,32 @@ resource "aws_instance" "test-tgw-us-east-2-vpc-1-private" {
   }
 }
 
-output "us-east-2-public-ip" {
-  value = aws_instance.test-tgw-us-east-2-vpc-1-public.public_ip
+resource "aws_instance" "test-tgw-us-east-2-vpc-2-private" {
+  provider = aws.us-east-2
+
+  ami                    = data.aws_ami.us-east-2.id
+  instance_type          = "t3.micro"
+  key_name               = aws_key_pair.tgw_testing-us-east-2.key_name
+  subnet_id              = module.us-east-2-vpc-2.private_subnets[0]
+  vpc_security_group_ids = [aws_security_group.tgw-testing-us-east-2-vpc-2.id]
+
+  tags = {
+    Name = "test-tgw-us-east-2-private"
+  }
 }
 
-output "us-west-2-public-ip" {
-  value = aws_instance.test-tgw-us-west-2-vpc-1-public.public_ip
+output "us-east-2-ips" {
+  value = {
+    vpc-1-public  = aws_instance.test-tgw-us-east-2-vpc-1-public.public_ip,
+    vpc-1-private = aws_instance.test-tgw-us-east-2-vpc-1-private.private_ip,
+    vpc-2-private = aws_instance.test-tgw-us-east-2-vpc-2-private.private_ip
+  }
+}
+
+output "us-west-2-ips" {
+  value = {
+    vpc-1-public  = aws_instance.test-tgw-us-west-2-vpc-1-public.public_ip,
+    vpc-1-private = aws_instance.test-tgw-us-west-2-vpc-1-private.private_ip,
+    vpc-2-private = aws_instance.test-tgw-us-west-2-vpc-2-private.private_ip
+  }
 }
