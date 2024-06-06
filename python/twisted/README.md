@@ -1,0 +1,1 @@
+I tried to start the finger tutorial, but my heart isn't in it.
