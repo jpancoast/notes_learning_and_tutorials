@@ -1,4 +1,0 @@
-# Declare requirements for your Python Lambda function here.
-#
-# eg.
-# requests>=2

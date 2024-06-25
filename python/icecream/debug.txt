@@ -1,4 +1,0 @@
-DEBUG: blah.py:22 in <module>- add(2, 3): 5
-DEBUG: blah.py:23 in <module>- add(10,10): 20
-DEBUG: blah.py:22 in <module>- add(2, 3): 5
-DEBUG: blah.py:23 in <module>- add(10,10): 20
